@@ -3,7 +3,7 @@ import Image from "next/image";
 export function Card(props) {
   let status,
     date = "September 10, 2021",
-    temp = "10",
+    temp = 10,
     Background = null;
 
   // if (props.Value === "Night") {

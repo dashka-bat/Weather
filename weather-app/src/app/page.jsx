@@ -10,7 +10,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [city, setCity] = useState("Ulaanbaatar");
   const [dayWeather, setDayWeather] = useState({});
-  const [NightWeather, setNightWeather] = useState({
+  const [nightWeather, setNightWeather] = useState({
     temperature: 0,
     condition: ``,
   });
@@ -32,7 +32,12 @@ export default function Home() {
       .then((data) => {
         setDayWeather({
           temp: data.forecast.forecastday[0].day.maxtemp_c,
+          condition:data.forecast.forecastday[0].day.condition.text
         });
+        setNightWeather({
+          temp: data.forecast.forecastday[0].day.mintemp_c,
+          condition:data.forecast.forecastday[0].day.condition.text
+        })
 
         console.log(data.forecast.forecastday[0].day.maxtemp_c);
         console.log(data.forecast.forecastday[0].day.mintemp_c);
@@ -61,9 +66,9 @@ export default function Home() {
         <div className="relative ">
           <Card
             Value={"Night"}
-            status={NightWeather.condition}
+            status={nightWeather.condition}
             city={city}
-            temp={NightWeather.temp}
+            temp={nightWeather.temp}
           />
           <Nightside />
         </div>
