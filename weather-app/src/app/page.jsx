@@ -1,9 +1,9 @@
 "use client";
-import "./style.css";
 import { Card } from "@/components/card";
 import { SearchInput } from "@/components/SearchInput";
 import Nightside from "@/components/nightside";
 import CenterBoard from "@/components/Center-border";
+import Circle from "@/components/circles";
 import { useEffect, useState } from "react";
 const API_KEY = "0e6ef2cfb62c4bfaa5e72459241312";
 export default function Home() {
@@ -32,13 +32,15 @@ export default function Home() {
       .then((data) => {
         setDayWeather({
           temp: data.forecast.forecastday[0].day.maxtemp_c,
-          condition:data.forecast.forecastday[0].day.condition.text
+          condition: data.forecast.forecastday[0].day.condition.text,
+          date: data.forecast.forecastday[0].date,
         });
         setNightWeather({
           temp: data.forecast.forecastday[0].day.mintemp_c,
-          condition:data.forecast.forecastday[0].day.condition.text
-        })
-
+          condition: data.forecast.forecastday[0].day.condition.text,
+          date: data.forecast.forecastday[0].date,
+        });
+        console.log(data);
         console.log(data.forecast.forecastday[0].day.maxtemp_c);
         console.log(data.forecast.forecastday[0].day.mintemp_c);
         console.log(data.forecast.forecastday[0].day.condition.text);
@@ -46,13 +48,15 @@ export default function Home() {
   }, [city]);
 
   return (
-    <div className="bg-[#404040] h-screen">
-      <div className="bg-[#F3F4F6] h-[1200px] w-[1600px] flex justify-between mx-auto ">
-        <div className="bg-[#F3F4F6] h-[1200px] w-[800px] relative">
+    <div className="bg-gray-900 h-[1200px]">
+      <div className="bg-gray-200 h-[1200px] w-[1600px] flex justify-between mx-auto ">
+        <div className="bg-gray-200 h-[1200px] w-[800px] relative ">
+          <Circle />
           <Card
             status={dayWeather.condition}
             city={city}
             temp={dayWeather.temp}
+            date={dayWeather.date}
           />
           <CenterBoard />
           <SearchInput
@@ -61,14 +65,14 @@ export default function Home() {
             onPressEnter={onPressEnter}
           />
         </div>
-
-        <div className="background-1"></div>
+        <div></div>
         <div className="relative ">
           <Card
             Value={"Night"}
             status={nightWeather.condition}
             city={city}
             temp={nightWeather.temp}
+            date={nightWeather.date}
           />
           <Nightside />
         </div>
