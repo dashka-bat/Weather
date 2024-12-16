@@ -10,11 +10,9 @@
 export function Suggestion() {
   return (
     <>
-      <div
-        className="w-[500px] h-[300px] bg-gray-400 rounded-[20px] ml-[85px] z-40 "
-        // onFocus={() => openSuggestion(true)}
-        // onBlur={() => closeSuggestion(false)}
-      ></div>
+      {/* <div className="text-[64px] text-white bg-black w-[200px] h-[100px]">
+        {country}
+      </div> */}
     </>
   );
 }

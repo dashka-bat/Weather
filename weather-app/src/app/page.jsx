@@ -4,16 +4,23 @@ import { SearchInput } from "@/components/SearchInput";
 import Nightside from "@/components/nightside";
 import CenterBoard from "@/components/Center-border";
 import Circle from "@/components/circles";
+import { Suggestion } from "@/components/Suggestion";
 import { useEffect, useState } from "react";
 const API_KEY = "0e6ef2cfb62c4bfaa5e72459241312";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [city, setCity] = useState("Ulaanbaatar");
   const [dayWeather, setDayWeather] = useState({});
-  const [nightWeather, setNightWeather] = useState({
-    temperature: 0,
-    condition: ``,
-  });
+  const [nightWeather, setNightWeather] = useState({});
+  const [focus, setFocus] = useState(false);
+
+  const [country, setCountry] = useState([]);
+  const openSuggestion = () => {
+    setFocus(true);
+  };
+  const closeSuggestion = () => {
+    setFocus(false);
+  };
   const onChangetext = (e) => {
     setSearch(e.target.value);
   };
@@ -22,8 +29,18 @@ export default function Home() {
       setCity(search);
     }
   };
-  console.log(search, city);
-  console.log(search);
+  // console.log(search, city);
+  // console.log(search);
+  let allcity = [];
+
+  useEffect(() => {
+    fetch(`https://countriesnow.space/api/v0.1/countries`)
+      .then((response) => response.json())
+      .then((data) => {
+        setCountry(data?.data?.flatMap((country) => country?.cities || []));
+      });
+  }, [city]);
+  console.log(`https://countriesnow.space/api/v0.1/countries`);
   useEffect(() => {
     fetch(
       `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=1&aqi=no&alerts=no`
@@ -40,10 +57,10 @@ export default function Home() {
           condition: data.forecast.forecastday[0].day.condition.text,
           date: data.forecast.forecastday[0].date,
         });
-        console.log(data);
-        console.log(data.forecast.forecastday[0].day.maxtemp_c);
-        console.log(data.forecast.forecastday[0].day.mintemp_c);
-        console.log(data.forecast.forecastday[0].day.condition.text);
+        // console.log(data);
+        // console.log(data.forecast.forecastday[0].day.maxtemp_c);
+        // console.log(data.forecast.forecastday[0].day.mintemp_c);
+        // console.log(data.forecast.forecastday[0].day.condition.text);
       });
   }, [city]);
 
@@ -63,7 +80,12 @@ export default function Home() {
             search={search}
             onChangetext={onChangetext}
             onPressEnter={onPressEnter}
+            data={country}
           />
+
+          {/* <div className="text-[64px] text-white bg-black w-[200px] h-[100px]">
+            {country}
+          </div> */}
         </div>
         <div></div>
         <div className="relative ">

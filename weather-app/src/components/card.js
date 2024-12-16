@@ -81,7 +81,7 @@ export function Card(props) {
           {props.city}
         </div>
         <Image
-          className="mt-[24px] ml-[68.5px] "
+          className="mt-[24px] ml-[68.5px] drop-shadow-[0_5px_25px_rgba(255,255,255,5)] "
           src={weather}
           alt={""}
           width={260}

@@ -7,11 +7,13 @@ import { useState } from "react";
 // const closeSuggestion = () => {
 //   setFocus(false);
 // };
-console.log(focus);
-export function SearchInput({ search, onChangetext, onPressEnter }) {
+export function SearchInput({ search, onChangetext, onPressEnter, data }) {
+  const suggest = data?.filter((citiesName) => citiesName?.includes(search));
+  console.log(suggest);
+
   return (
     <div>
-      <div className="ml-[60px] mt-20 flex px-4 py-3 rounded-[40px] h-[80px] border-2 border-blue-500 overflow-hidden w-[567px] mx-auto font-[sans-serif] ">
+      <div className="ml-[60px] mt-20 flex px-4 py-3 rounded-[40px] h-[80px] border-2 border-blue-500 overflow-hidden w-[567px] mx-auto font-[sans-serif] relative z-40 ">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 192.904 192.904"
@@ -29,10 +31,16 @@ export function SearchInput({ search, onChangetext, onPressEnter }) {
           onKeyDown={onPressEnter}
         />
       </div>
-      <Suggestion
-      // onFocus={() => openSuggestion(true)}
-      // onBlur={() => closeSuggestion(false)}
-      />
+      {search && (
+        <div
+          className="w-[300px] h-[100px] absolute bg-white
+               top-[190px] text-black overflow-y-scroll "
+        >
+          {suggest?.slice(0, 10).map((filteredName, index) => {
+            return <div key={index}>{filteredName}</div>;
+          })}
+        </div>
+      )}
     </div>
   );
 }
