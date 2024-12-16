@@ -1,15 +1,18 @@
 import { Suggestion } from "./Suggestion";
 import { useState } from "react";
+
 // const [focus, setFocus] = useState(false);
 // const openSuggestion = () => {
 //   setFocus(true);
 // };
 // const closeSuggestion = () => {
 //   setFocus(false);
-// };
-export function SearchInput({ search, onChangetext, onPressEnter, data }) {
+
+
+
+export function SearchInput({ search, onChangetext, onPressEnter, data,setSearch }) {
   const suggest = data?.filter((citiesName) => citiesName?.includes(search));
-  console.log(suggest);
+  console.log("hahahaha",suggest);
 
   return (
     <div>
@@ -27,17 +30,20 @@ export function SearchInput({ search, onChangetext, onPressEnter, data }) {
           placeholder="City name"
           className="w-full outline-none bg-transparent text-black text-[32px]"
           value={search}
+        setSearch={search}
           onChange={onChangetext}
           onKeyDown={onPressEnter}
         />
       </div>
-      {search && (
+      {search  &&    (
         <div
-          className="w-[300px] h-[100px] absolute bg-white
-               top-[190px] text-black overflow-y-scroll "
+          className="w-[500px] h-[200px] absolute bg-white
+               top-[190px] text-black overflow-y-scroll z-40 ml-[80px] rounded-2xl border-[5px]-solid border-black  "
         >
           {suggest?.slice(0, 10).map((filteredName, index) => {
-            return <div key={index}>{filteredName}</div>;
+            return <li onClick={(e)=>{setSearch(filteredName )
+
+            }}  className="text-[32px] border-solid border-black list-none" key={index}>Location:{filteredName}</li>;
           })}
         </div>
       )}

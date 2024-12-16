@@ -12,21 +12,19 @@ export default function Home() {
   const [city, setCity] = useState("Ulaanbaatar");
   const [dayWeather, setDayWeather] = useState({});
   const [nightWeather, setNightWeather] = useState({});
-  const [focus, setFocus] = useState(false);
+  
 
   const [country, setCountry] = useState([]);
-  const openSuggestion = () => {
-    setFocus(true);
-  };
-  const closeSuggestion = () => {
-    setFocus(false);
-  };
+  
   const onChangetext = (e) => {
-    setSearch(e.target.value);
+    setSearch(e.target.value)
+    ;
   };
   const onPressEnter = (e) => {
     if (e.code === "Enter") {
       setCity(search);
+    }else{
+      search=''
     }
   };
   // console.log(search, city);
@@ -81,6 +79,7 @@ export default function Home() {
             onChangetext={onChangetext}
             onPressEnter={onPressEnter}
             data={country}
+            setSearch={setSearch}
           />
 
           {/* <div className="text-[64px] text-white bg-black w-[200px] h-[100px]">
