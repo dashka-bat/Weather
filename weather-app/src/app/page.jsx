@@ -10,7 +10,11 @@ const API_KEY = "0e6ef2cfb62c4bfaa5e72459241312";
 export default function Home() {
   const [search, setSearch] = useState("");
   const [city, setCity] = useState("Ulaanbaatar");
-  const [dayWeather, setDayWeather] = useState({});
+  const [dayWeather, setDayWeather] = useState({
+    condition:"",
+    temp:0,
+    date:0,
+  });
   const [nightWeather, setNightWeather] = useState({});
   
 

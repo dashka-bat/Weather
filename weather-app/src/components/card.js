@@ -34,35 +34,68 @@ export function Card(props) {
   // } else {
   //   StatusColor = "bg-yellow";
   // }
-
+// night----->
   if (status === "Sunny" && props.Value === "Night") {
     weather = "/Sun.png";
   } else if (status === "Clear" && props.Value === "Night") {
     weather = "/Sun.png";
-  } else if (status === "Partly cloudy" && props.Value === "Night") {
+  } else if (status.includes("Cloud")  && props.Value === "Night") {
     weather = "/NightClouds.png";
-  } else if (status === "Moderate rain" && props.Value === "Night") {
+  }else if (status.includes("cloud")  && props.Value === "Night") {
+    weather = "/NightClouds.png";
+  } else if (status.includes("Rain") && props.Value === "Night") {
+    
     weather = "/NightRain.png";
-  } else if (
-    status === "Moderate or heavy snow showers" &&
+  }
+  else if(status.includes("rain")&&props.Value==="Night"){
+    weather = "/NightRain.png";
+  }
+   else if (
+    status.includes("Snow")  &&
     props.Value === "Night"
   ) {
     weather = "/NightSnow.png";
-  } else if (status === "Light rain" && props.Value === "Night") {
+  }
+  else if (status.includes("snow")  && props.Value === "Night") {
+    weather = "/NightClouds.png";
+  } else if (status.includes("Rain")  && props.Value === "Night") {
     weather = "/NightStorm.png";
-  } else if (status === "Windy" && props.Value === "Night") {
+  }else if (status.includes("rain")  && props.Value === "Night") {
+    weather = "/NightStorm.png";
+  } else if (status.includes("Wind")  && props.Value === "Night") {
     weather = "/NightWind.png";
-  } else if (status === "Sunny") {
+  }else if (status.includes("wind")  && props.Value === "Night") {
+    weather = "/NightWind.png";
+  }
+  
+//---->day
+  else if (status.includes("Sunny") ) {
     weather = "/DaySun.png";
-  } else if (status === "Partly cloudy") {
+  } else if (status.includes("Cloud") ) {
     weather = "/DayClouds.png";
-  } else if (status === "Moderate rain") {
+    
+  }else if (status.includes("cloud") ) {
+    weather = "/DayClouds.png";
+    
+  }
+  else if(status.includes("overcast")){
+weather="/DayClouds.png";
+  }
+     else if (status.includes("Rain")) {
     weather = "/DayRain.png";
-  } else if (status === "Light rain") {
+  }else if (status.includes("rain")) {
+    weather = "/DayRain.png";
+  } else if (status.includes("Storm") ) {
     weather = "/DayStorm.png";
-  } else if (status === "Wind") {
+  }else if (status.includes("storm") ) {
+    weather = "/DayStorm.png";
+  } else if (status.includes("Wind") ) {
     weather = "/DayWind.png";
-  } else if (status === "Moderate or heavy snow showers") {
+  }else if (status.includes("wind") ) {
+    weather = "/DayWind.png";
+  } else if (status.includes("Snow") ) {
+    weather = "/DaySnow.png";
+  }else if (status.includes("snow") ) {
     weather = "/DaySnow.png";
   }
   if (props.status === "Sunny" && props.Value === "Night") {
