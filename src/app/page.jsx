@@ -102,7 +102,6 @@ export default function Home() {
           />
           <Nightside />
         </div>
-        hi
       </div>
     </div>
   );
